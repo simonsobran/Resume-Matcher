@@ -588,7 +588,7 @@ const ResumeBuilderContent = () => {
 
   return (
     <div
-      className="h-screen md:h-[66vh] w-full bg-[#F0F0E8] flex justify-center items-center p-4 md:p-8"
+      className="h-screen w-full bg-[#F0F0E8] flex justify-center items-center p-4 md:p-8"
       style={{
         backgroundImage:
           'linear-gradient(rgba(29, 78, 216, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(29, 78, 216, 0.1) 1px, transparent 1px)',
@@ -598,7 +598,7 @@ const ResumeBuilderContent = () => {
       {/* Main Container */}
       <div className="w-full h-full max-w-[90%] md:max-w-[95%] xl:max-w-[1800px] border border-black bg-[#F0F0E8] shadow-[8px_8px_0px_0px_rgba(0,0,0,0.1)] flex flex-col">
         {/* Header Section */}
-        <div className="border-b border-black p-6 md:p-8 bg-[#F0F0E8] no-print">
+        <div className="border-b border-black p-4 md:p-5 bg-[#F0F0E8] no-print">
           {/* Top Row: Back button and Actions */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
             <div>
