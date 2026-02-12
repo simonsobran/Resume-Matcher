@@ -588,7 +588,7 @@ const ResumeBuilderContent = () => {
 
   return (
     <div
-      className="h-screen w-full bg-[#F0F0E8] flex justify-center items-center p-4 md:p-8"
+      className="h-screen md:h-[66vh] w-full bg-[#F0F0E8] flex justify-center items-center p-4 md:p-8"
       style={{
         backgroundImage:
           'linear-gradient(rgba(29, 78, 216, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(29, 78, 216, 0.1) 1px, transparent 1px)',
