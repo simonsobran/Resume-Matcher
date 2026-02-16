@@ -33,6 +33,29 @@ Create tailored resumes for each job application with AI-powered suggestions. Wo
 >
 > This project is in active development. New features are being added continuously, and we welcome contributions from the community. If you have any suggestions or feature requests, please feel free to open an issue on GitHub or discuss it on our [Discord](https://dsc.gg/resume-matcher) server.
 
+## Fork Notice
+
+This repository is a fork of the original project:
+
+- Original: [srbhr/Resume-Matcher](https://github.com/srbhr/Resume-Matcher)
+- This fork: [simonsobran/Resume-Matcher](https://github.com/simonsobran/Resume-Matcher)
+
+### End-User Differences in This Fork
+
+| Area | Original | This Fork | End-User Impact |
+|------|----------|-----------|-----------------|
+| Tailoring prompts | Fixed prompt flow | Dedicated prompts page with editable prompts | You can customize how AI tailors resumes before generating |
+| Resume section ordering | Standard section controls | Drag-and-drop section ordering | Faster resume restructuring in the builder |
+| Builder defaults | Formatting controls expanded by default | Formatting panel collapsed by default | Cleaner initial workspace with less visual clutter |
+| Desktop builder viewport | Standard height | Reduced default height | Better visibility of surrounding controls on desktop |
+| Builder stability | Prior behavior | Hydration and Tiptap remount fixes | Fewer editor reset/remount issues during editing |
+| Create Resume action | Prior button layout | Button layout fixes | More reliable and clearer resume creation flow |
+
+### Upgrade Notes
+
+- Existing resume data and workflows remain compatible.
+- If you are migrating from upstream, the main change is UX behavior in the builder and prompt customization controls.
+
 ## Getting Started
 
 Resume Matcher works by creating a master resume that you can use to tailor for each job application. Installation instructions here: [How to Install](#how-to-install)
@@ -183,7 +206,7 @@ Fastest for MacOS, WSL and Ubuntu users:
 
 ```bash
 # Clone the repository
-git clone https://github.com/srbhr/Resume-Matcher.git
+git clone https://github.com/simonsobran/Resume-Matcher.git
 cd Resume-Matcher
 
 # Backend (Terminal 1)
