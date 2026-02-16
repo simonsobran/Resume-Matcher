@@ -24,6 +24,8 @@ import {
   Check,
   Sparkles,
   Loader2,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
 import { useResumePreview } from '@/components/common/resume_previewer_context';
 import { PaginatedPreview } from '@/components/preview';
@@ -137,6 +139,7 @@ const ResumeBuilderContent = () => {
 
   // Tab state
   const [activeTab, setActiveTab] = useState<TabId>('resume');
+  const [isPreviewVisible, setIsPreviewVisible] = useState(true);
 
   // Cover letter & outreach state
   const [coverLetter, setCoverLetter] = useState('');
@@ -628,6 +631,17 @@ const ResumeBuilderContent = () => {
             </div>
 
             <div className="flex gap-3 mt-4 md:mt-0">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setIsPreviewVisible((prev) => !prev)}
+              >
+                {isPreviewVisible ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                {isPreviewVisible
+                  ? t('builder.previewToggle.hide')
+                  : t('builder.previewToggle.show')}
+              </Button>
+
               {/* Resume tab actions */}
               {activeTab === 'resume' && (
                 <>
@@ -729,10 +743,14 @@ const ResumeBuilderContent = () => {
         </div>
 
         {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 bg-black gap-[1px] flex-1 min-h-0">
+        <div
+          className={`grid bg-black gap-[1px] flex-1 min-h-0 ${
+            isPreviewVisible ? 'grid-cols-1 lg:grid-cols-2' : 'grid-cols-1'
+          }`}
+        >
           {/* Left Panel: Editor */}
           <div className="bg-[#F0F0E8] p-6 md:p-8 overflow-y-auto no-print">
-            <div className="max-w-3xl mx-auto space-y-6">
+            <div className={`${isPreviewVisible ? 'max-w-3xl' : 'max-w-5xl'} mx-auto space-y-6`}>
               <div className="flex items-center gap-2 border-b-2 border-black pb-2">
                 <div className="w-3 h-3 bg-blue-700"></div>
                 <h2 className="font-mono text-lg font-bold uppercase tracking-wider">
@@ -839,83 +857,85 @@ const ResumeBuilderContent = () => {
           </div>
 
           {/* Right Panel: Preview with Tabs */}
-          <div className="bg-[#E5E5E0] overflow-hidden flex flex-col no-print">
-            {/* Tabs Header */}
-            <div className="px-6 pt-3 shrink-0 bg-[#E5E5E0]">
-              <RetroTabs
-                tabs={[
-                  { id: 'resume', label: t('builder.previewTabs.resume') },
-                  {
-                    id: 'cover-letter',
-                    label: t('builder.previewTabs.coverLetter'),
-                    disabled: !coverLetter,
-                  },
-                  {
-                    id: 'outreach',
-                    label: t('builder.previewTabs.outreach'),
-                    disabled: !outreachMessage,
-                  },
-                  {
-                    id: 'jd-match',
-                    label: t('builder.previewTabs.jdMatch'),
-                    disabled: !jobDescription,
-                  },
-                ]}
-                activeTab={activeTab}
-                onTabChange={(id) => setActiveTab(id as TabId)}
-              />
-            </div>
-
-            {/* Preview Content */}
-            <div className="flex-1 overflow-y-auto">
-              {/* Resume Preview */}
-              {activeTab === 'resume' && (
-                <PaginatedPreview
-                  resumeData={localizedResumeDataForPreview}
-                  settings={templateSettings}
+          {isPreviewVisible && (
+            <div className="bg-[#E5E5E0] overflow-hidden flex flex-col no-print">
+              {/* Tabs Header */}
+              <div className="px-6 pt-3 shrink-0 bg-[#E5E5E0]">
+                <RetroTabs
+                  tabs={[
+                    { id: 'resume', label: t('builder.previewTabs.resume') },
+                    {
+                      id: 'cover-letter',
+                      label: t('builder.previewTabs.coverLetter'),
+                      disabled: !coverLetter,
+                    },
+                    {
+                      id: 'outreach',
+                      label: t('builder.previewTabs.outreach'),
+                      disabled: !outreachMessage,
+                    },
+                    {
+                      id: 'jd-match',
+                      label: t('builder.previewTabs.jdMatch'),
+                      disabled: !jobDescription,
+                    },
+                  ]}
+                  activeTab={activeTab}
+                  onTabChange={(id) => setActiveTab(id as TabId)}
                 />
-              )}
+              </div>
 
-              {/* Cover Letter Preview */}
-              {activeTab === 'cover-letter' &&
-                (coverLetter && resumeData.personalInfo ? (
-                  <div className="p-6">
-                    <CoverLetterPreview
-                      content={coverLetter}
-                      personalInfo={resumeData.personalInfo}
-                      pageSize={templateSettings.pageSize}
+              {/* Preview Content */}
+              <div className="flex-1 overflow-y-auto">
+                {/* Resume Preview */}
+                {activeTab === 'resume' && (
+                  <PaginatedPreview
+                    resumeData={localizedResumeDataForPreview}
+                    settings={templateSettings}
+                  />
+                )}
+
+                {/* Cover Letter Preview */}
+                {activeTab === 'cover-letter' &&
+                  (coverLetter && resumeData.personalInfo ? (
+                    <div className="p-6">
+                      <CoverLetterPreview
+                        content={coverLetter}
+                        personalInfo={resumeData.personalInfo}
+                        pageSize={templateSettings.pageSize}
+                      />
+                    </div>
+                  ) : (
+                    <GeneratePrompt
+                      type="cover-letter"
+                      isGenerating={isGeneratingCoverLetter}
+                      onGenerate={handleGenerateCoverLetter}
+                      isTailoredResume={isTailoredResume}
                     />
-                  </div>
-                ) : (
-                  <GeneratePrompt
-                    type="cover-letter"
-                    isGenerating={isGeneratingCoverLetter}
-                    onGenerate={handleGenerateCoverLetter}
-                    isTailoredResume={isTailoredResume}
-                  />
-                ))}
+                  ))}
 
-              {/* Outreach Preview */}
-              {activeTab === 'outreach' &&
-                (outreachMessage ? (
-                  <div className="p-6">
-                    <OutreachPreview content={outreachMessage} />
-                  </div>
-                ) : (
-                  <GeneratePrompt
-                    type="outreach"
-                    isGenerating={isGeneratingOutreach}
-                    onGenerate={handleGenerateOutreach}
-                    isTailoredResume={isTailoredResume}
-                  />
-                ))}
+                {/* Outreach Preview */}
+                {activeTab === 'outreach' &&
+                  (outreachMessage ? (
+                    <div className="p-6">
+                      <OutreachPreview content={outreachMessage} />
+                    </div>
+                  ) : (
+                    <GeneratePrompt
+                      type="outreach"
+                      isGenerating={isGeneratingOutreach}
+                      onGenerate={handleGenerateOutreach}
+                      isTailoredResume={isTailoredResume}
+                    />
+                  ))}
 
-              {/* JD Match Comparison */}
-              {activeTab === 'jd-match' && jobDescription && (
-                <JDComparisonView jobDescription={jobDescription} resumeData={resumeData} />
-              )}
+                {/* JD Match Comparison */}
+                {activeTab === 'jd-match' && jobDescription && (
+                  <JDComparisonView jobDescription={jobDescription} resumeData={resumeData} />
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Footer */}

@@ -225,6 +225,10 @@
       "outreach": "联系邮件",
       "jdMatch": "JD 匹配"
     },
+    "previewToggle": {
+      "show": "显示预览",
+      "hide": "隐藏预览"
+    },
     "footer": {
       "moduleLabel": "简历编辑模块",
       "singleColumn": "单栏",

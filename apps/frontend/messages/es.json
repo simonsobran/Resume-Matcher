@@ -225,6 +225,10 @@
       "outreach": "MENSAJE",
       "jdMatch": "COINCIDENCIA JD"
     },
+    "previewToggle": {
+      "show": "Mostrar vista previa",
+      "hide": "Ocultar vista previa"
+    },
     "footer": {
       "moduleLabel": "Módulo del constructor",
       "singleColumn": "Una columna",

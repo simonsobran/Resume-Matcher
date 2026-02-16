@@ -225,6 +225,10 @@
       "outreach": "連絡メール",
       "jdMatch": "JD一致"
     },
+    "previewToggle": {
+      "show": "プレビューを表示",
+      "hide": "プレビューを非表示"
+    },
     "footer": {
       "moduleLabel": "履歴書ビルダーモジュール",
       "singleColumn": "1カラム",

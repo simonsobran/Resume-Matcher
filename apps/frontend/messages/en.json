@@ -225,6 +225,10 @@
       "outreach": "OUTREACH MAIL",
       "jdMatch": "JD MATCH"
     },
+    "previewToggle": {
+      "show": "Show Preview",
+      "hide": "Hide Preview"
+    },
     "footer": {
       "moduleLabel": "Resume Builder Module",
       "singleColumn": "Single Column",

@@ -225,6 +225,10 @@
       "outreach": "MENSAGEM DE CONTATO",
       "jdMatch": "ANÁLISE DE VAGA"
     },
+    "previewToggle": {
+      "show": "Mostrar pré-visualização",
+      "hide": "Ocultar pré-visualização"
+    },
     "footer": {
       "moduleLabel": "Módulo de Criação de Currículo",
       "singleColumn": "Coluna Única",
